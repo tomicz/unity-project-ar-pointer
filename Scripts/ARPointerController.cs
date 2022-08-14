@@ -34,6 +34,22 @@ namespace TOMICZ.AR
             EnableIndicator(enabled);
         }
 
+        public void PlaceIndicator()
+        {
+            if (!IsIndicatorAvailable)
+            {
+                return;
+            }
+
+            if (!_raycaster.IsTrackableBeingHit)
+            {
+                return;
+            }
+
+            _indicatorObject.gameObject.AddComponent<ARAnchor>();
+            _indicatorObject = null;
+        }
+
         private void Awake()
         {
             _raycastManager = GetComponent<ARRaycastManager>();

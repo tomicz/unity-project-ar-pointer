@@ -1243,7 +1243,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1506647676}
         m_TargetAssemblyTypeName: TOMICZ.AR.ARPointerController, Assembly-CSharp-firstpass
-        m_MethodName: DisablePointer
+        m_MethodName: PlaceIndicator
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
