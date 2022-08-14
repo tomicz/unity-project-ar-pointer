@@ -15,6 +15,11 @@ namespace TOMICZ.AR
         private Vector2 _screenPoint;
         private bool _isTrackableFound;
 
+        /// <summary>
+        /// ARRaycaster is a raycast that detects only AR Trackables.
+        /// </summary>
+        /// <param name="raycastManager"></param>
+        /// <param name="sessionOrigin"></param>
         public ARRaycaster(ARRaycastManager raycastManager, ARSessionOrigin sessionOrigin)
         {
             _raycastManager = raycastManager;
@@ -22,6 +27,12 @@ namespace TOMICZ.AR
             _screenPoint = new Vector2(Screen.width / 2, Screen.height / 2);
         }
 
+        /// <summary>
+        /// Gets position where raycast and trackable intersect.
+        /// </summary>
+        /// <param name="trackableTypes"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
         public Vector3 GetRaycastHitPosition(TrackableType trackableTypes, float offset)
         {
             if (IsTrackableFound(trackableTypes))
