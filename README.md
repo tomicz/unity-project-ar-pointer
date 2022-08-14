@@ -1,3 +1,7 @@
+<p align="center">
+<img src="https://media.giphy.com/media/UVAtvQ3QHAz8g9CbsH/giphy.gif" alt="ARPointer animation" title="Grid GIF" width="500"/>
+</p>
+
 # About
 
 AR Pointer is a helper tool made for developers that indicates where the ARCamera is pointing in Augmented Reality. Most AR experiences at some point will require an indicator that guides the user on where to place content or how to navigate AR applications. AR Pointer is a perfect solution for developers who prefer rapidly developing AR experiences.
