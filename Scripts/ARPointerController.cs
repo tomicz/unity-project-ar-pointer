@@ -10,7 +10,7 @@ namespace TOMICZ.AR
     public class ARPointerController : MonoBehaviour
     {
         [SerializeField] private TrackableType _trackableTypes;
-        [SerializeField] private Transform _indicatorObject = null;
+        [SerializeField] private GameObject _prefabObject = null;
         [SerializeField] private float _trackingLostOffset = 0.5f;
 
         [Space(10)]
@@ -20,7 +20,32 @@ namespace TOMICZ.AR
         private ARRaycastManager _raycastManager;
         private ARSessionOrigin _sessionOrigin;
         private ARRaycaster _raycaster;
-        private bool IsIndicatorAvailable => _indicatorObject != null;
+        private ARObject _arObject;
+        private bool IsPrefabAvailable => _prefabObject != null;
+
+        private void Awake()
+        {
+            _raycastManager = GetComponent<ARRaycastManager>();
+            _sessionOrigin = GetComponent<ARSessionOrigin>();
+            _raycaster = new ARRaycaster(_raycastManager, _sessionOrigin);
+
+            if (IsPrefabAvailable)
+            {
+                _arObject = _prefabObject.AddComponent<ARObject>();
+                _arObject.SetPointerController(this);
+            }
+        }
+
+        private void Update()
+        {
+            if (!IsPrefabAvailable)
+            {
+                return;
+            }
+
+            RegisterTrackableEvents();
+            UpdateIndicator();
+        }
 
         public void EnablePointer()
         {
@@ -34,9 +59,9 @@ namespace TOMICZ.AR
             EnableIndicator(enabled);
         }
 
-        public void PlaceIndicator()
+        public void PlaceObject()
         {
-            if (!IsIndicatorAvailable)
+            if (!IsPrefabAvailable)
             {
                 return;
             }
@@ -46,26 +71,18 @@ namespace TOMICZ.AR
                 return;
             }
 
-            _indicatorObject.gameObject.AddComponent<ARAnchor>();
-            _indicatorObject = null;
+            AttachAnchor(_prefabObject.transform);
+            SetIndicatorNull();
         }
 
-        private void Awake()
+        public void SelectObject(GameObject gameObject)
         {
-            _raycastManager = GetComponent<ARRaycastManager>();
-            _sessionOrigin = GetComponent<ARSessionOrigin>();
-            _raycaster = new ARRaycaster(_raycastManager, _sessionOrigin);
-        }
-
-        private void FixedUpdate()
-        {
-            if (!IsIndicatorAvailable)
+            if(!IsPrefabAvailable)
             {
-                return;
-            }
+                _prefabObject = gameObject;
 
-            RegisterTrackableEvents();
-            UpdateIndicatorPosition();
+                AttachARObject();
+            }
         }
 
         private void RegisterTrackableEvents()
@@ -80,11 +97,38 @@ namespace TOMICZ.AR
             }
         }
 
-        private void UpdateIndicatorPosition()
+        private void UpdateIndicator()
         {
-            _indicatorObject.transform.position = _raycaster.RaycastHitPosition(_trackableTypes, _trackingLostOffset);
+            _arObject.SetPosition(_raycaster.GetRaycastHitPosition(_trackableTypes, _trackingLostOffset));
         }
 
-        private void EnableIndicator(bool enabled) => _indicatorObject.gameObject.SetActive(enabled);
+        private void EnableIndicator(bool enabled) => _prefabObject.gameObject.SetActive(enabled);
+
+        private void SetIndicatorNull()
+        {
+            _arObject.SetPointerController(this);
+            _arObject = null;
+            _prefabObject = null;
+        }
+
+        private void AttachAnchor(Transform transform)
+        {
+            var anchor = transform.GetComponent<ARAnchor>();
+
+            if (anchor == null)
+            {
+                transform.gameObject.AddComponent<ARAnchor>();
+            }
+        }
+
+        private void AttachARObject()
+        {
+            _arObject = gameObject.GetComponent<ARObject>();
+
+            if (_arObject == null)
+            {
+                _arObject = gameObject.AddComponent<ARObject>();
+            }
+        }
     }
 }

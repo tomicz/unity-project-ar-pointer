@@ -22,7 +22,7 @@ namespace TOMICZ.AR
             _screenPoint = new Vector2(Screen.width / 2, Screen.height / 2);
         }
 
-        public Vector3 RaycastHitPosition(TrackableType trackableTypes, float offset)
+        public Vector3 GetRaycastHitPosition(TrackableType trackableTypes, float offset)
         {
             if (IsTrackableFound(trackableTypes))
             {
