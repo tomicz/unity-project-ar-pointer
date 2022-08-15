@@ -60,3 +60,5 @@ Only selected GameObjects can be placed on the trackable surface. In the example
 
 ARPointerController.SelectObject(_anyObject); 
 ```
+
+When object has been placed to the ground, to return it back to selection you must tap with your finger onto the object and it will return. The object must have rigidbody and a collider to register click event.
