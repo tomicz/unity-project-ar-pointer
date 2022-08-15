@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://media.giphy.com/media/1Zxd7MF4QMdurxkpn5/giphy.gif" alt="ARPointer animation" title="ARPointer GIF" width="500"/>
+<img src="https://media.giphy.com/media/SGLkvW0dExEgX2fD0a/giphy.gif" alt="ARPointer animation" title="ARPointer GIF" width="1000"/>
 </p>
 
 # About
