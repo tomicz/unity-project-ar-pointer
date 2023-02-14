@@ -4,7 +4,7 @@
 
 # About
 
-AR Pointer is a helper tool made for developers that indicates where the ARCamera is pointing in Augmented Reality. Most AR experiences at some point will require an indicator that guides the user on where to place content or how to navigate AR applications. AR Pointer is a perfect solution for developers who prefer rapidly developing AR experiences.
+AR Pointer is a software utility developed to assist developers in identifying the direction of the ARCamera in Augmented Reality. As most AR applications necessitate a guide to direct users on content placement and AR navigation, the AR Pointer provides an optimal solution for developers who prioritize the swift development of AR experiences.
 
 ### Requirements
 
@@ -21,7 +21,7 @@ AR Pointer is a helper tool made for developers that indicates where the ARCamer
 
 ## Getting started
    
-ARPointer is built on top of ARFoundation and it will not work without it. It is required to install ARFoundation package in order for ARPointer to function properly. 
+ARPointer is a utility that is dependent on ARFoundation, and therefore, cannot function without it. The installation of the ARFoundation package is a necessary prerequisite for ARPointer to operate as intended.
 
  * Install ARFoundation package.
  * Import ARPointer folder to your project.
@@ -41,19 +41,19 @@ ARPointer is built on top of ARFoundation and it will not work without it. It is
 
 ### Code snipets
 
-ARPointerController is enabled by default, but if it is disabled, you can call this method to enable it.
+By default, ARPointerController is activated, but if it happens to be deactivated, the corresponding method can be invoked to enable it.
 
 ```ARPointerController.EnablePointer();```
 
-ARPointerController is running in an Update loop and it's a good practice to disable it after you don't need it. Call this function to disable it.
+ARPointerController is executed within an Update loop, and it is recommended to disable it once it has served its purpose. To deactivate ARPointerController, please invoke the designated function.
 
 ```ARPointerController.DisablePointer();```
 
-To place an object (Prefab Object) into the scene/ arplane, call this method. Prefab Object cannot be null and ARPointerController has to point at a trackable.
+In order to insert a Prefab Object onto the scene or an AR plane, please invoke this method. Please note that the Prefab Object parameter must not be null, and that ARPointerController must be directed towards a trackable entity.
 
 ```ARPointerController.PlaceObject();```
 
-Only selected GameObjects can be placed on the trackable surface. In the example scene you can notice that unity's primitive GameObeject cube is selected by defaut, but you can set any object as default or even leave it null and add it at runtime. To do that call this method.
+Please be advised that only specific GameObjects are permitted to be placed onto the trackable surface. Although the example scene designates Unity's primitive GameObject cube as the default option, it is possible to define any alternative object as the default or choose to leave it null and assign it during runtime. To implement this, please call the corresponding method.
 
 ``` 
 [SerializeField] private GameObject _anyObject;
@@ -61,4 +61,4 @@ Only selected GameObjects can be placed on the trackable surface. In the example
 ARPointerController.SelectObject(_anyObject); 
 ```
 
-When object has been placed to the ground, to return it back to selection you must tap with your finger onto the object and it will return. The object must have rigidbody and a collider to register click event.
+Once an object has been placed onto the ground, it can be returned to the selection menu by simply tapping on it. Please note that the object must possess both a rigidbody component and a collider component in order to register the click event.
